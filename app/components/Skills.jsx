@@ -6,7 +6,7 @@ import { SiNextdotjs, SiMongodb, SiTailwindcss, SiJavascript, SiTypescript } fro
 export default function Skills() {
   const skills = [
     { name: "React.js", icon: <FaReact className="text-sky-500" /> },
-    { name: "Next.js", icon: <SiNextdotjs className="text-black" /> },
+    { name: "Next.js", icon: <SiNextdotjs className="text-gray-900" /> },
     { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
     { name: "MongoDB", icon: <SiMongodb className="text-green-700" /> },
     { name: "JavaScript", icon: <SiJavascript className="text-yellow-500" /> },
@@ -18,18 +18,22 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="px-6 py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50">
-      <div className="max-w-6xl mx-auto text-center">
+    <section
+      id="skills"
+      className="-mt-16 px-6 py-20 bg-gradient-to-tr from-[#FFDEE9] via-[#B5FFFC] to-[#FFFAF0]"
+    >
+      <div className="max-w-7xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-4xl font-extrabold text-gray-900"
+          className="text-4xl sm:text-5xl font-extrabold text-[#4E342E] drop-shadow-md"
         >
           💡 My Skills
         </motion.h2>
-        <p className="mt-4 text-lg text-gray-600">
-          A mix of modern frontend technologies and tools I work with.
+        <p className="mt-4 text-lg sm:text-xl text-[#6D4C41]">
+          A blend of modern frontend technologies and tools I work with.
         </p>
 
         {/* Skills Grid */}
@@ -37,12 +41,15 @@ export default function Skills() {
           {skills.map((skill, index) => (
             <motion.div
               key={index}
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 200 }}
-              className="flex flex-col items-center justify-center bg-white rounded-2xl shadow-md p-6 border border-gray-100 hover:shadow-xl transition"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, type: "spring", stiffness: 200 }}
+              whileHover={{ scale: 1.1, rotate: 3 }}
+              className="flex flex-col items-center justify-center bg-white/70 backdrop-blur-md rounded-3xl shadow-lg border border-gray-200 p-6 hover:shadow-2xl transition-all duration-300"
             >
-              <div className="text-5xl mb-4">{skill.icon}</div>
-              <h3 className="text-lg font-semibold text-gray-800">{skill.name}</h3>
+              <div className="text-6xl mb-4 drop-shadow-md">{skill.icon}</div>
+              <h3 className="text-lg font-bold text-[#3E2723]">{skill.name}</h3>
             </motion.div>
           ))}
         </div>

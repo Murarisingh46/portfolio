@@ -1,56 +1,56 @@
+"use client";
 import React, { useState } from 'react';
 import { assets } from '@/assets/assets';
 import Image from "next/image";
-import { Moon } from "lucide-react"; // ✅ Dark mode icon
+import { Moon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Prevent background scroll when menu is open
+  // Prevent background scroll when mobile menu is open
   React.useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
   }, [menuOpen]);
 
+  const navLinks = [
+    { name: "Home", href: "#" },
+    { name: "About", href: "#aboutMe" },
+    { name: "Skills", href: "#skills" },
+    { name: "Projects", href: "#projects" },
+  ];
+
   return (
-    <div>
-      <nav className='flex items-center justify-between p-6 fixed w-full z-50 bg-white lg:px-8 xl:px-[8%] shadow'>
-        <a href="">
-          {/* <Image src={assets.logo} alt="Logo" className='w-28 cursor-pointer mr-14' /> */}
-          <h1 className='text-2xl font-bold text-gray-800'>Murari <span className='text-red-300'>.</span></h1>
+    <nav className="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-md px-6 py-4 lg:px-12 transition-all">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <a href="#" className="flex items-center">
+          <h1 className="text-2xl font-extrabold text-gray-800">
+            Murari <span className="text-red-300">.</span>
+          </h1>
         </a>
 
-        {/* Hamburger Icon for Mobile */}
-        <button
-          className="md:hidden block"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <svg className="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-
         {/* Desktop Menu */}
-        <ul className='hidden md:flex gap-10 text-lg font-medium'>
-          <li className='cursor-pointer hover:text-blue-600'>Home</li>
-          <li className='cursor-pointer hover:text-blue-600'>About</li>
-          <li className='cursor-pointer hover:text-blue-600'>Services</li>
-          <li className='cursor-pointer hover:text-blue-600'>Blog</li>
+        <ul className="hidden md:flex gap-10 text-lg font-medium text-gray-700">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <a
+                href={link.href}
+                className="relative group hover:text-blue-600 transition-all"
+              >
+                {link.name}
+                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
+              </a>
+            </li>
+          ))}
         </ul>
 
-        {/* Right side items (Dark mode icon + Contact) */}
+        {/* Right Side */}
         <div className="hidden md:flex items-center gap-4">
-          {/* Dark Mode Icon (just an icon for now) */}
+          {/* Dark Mode Icon */}
           <button
             className="p-2 rounded-full border border-gray-300 hover:bg-gray-100 transition"
-            aria-label="Dark mode icon"
+            aria-label="Dark mode"
           >
             <Moon className="w-5 h-5 text-gray-700" />
           </button>
@@ -58,50 +58,77 @@ const Navbar = () => {
           {/* Contact Button */}
           <a
             href="#contact"
-            className='text-gray-600 border border-gray-400 px-6 py-3 rounded-full font-semibold hover:bg-blue-50 hover:scale-105 transition-all duration-300 items-center shadow-sm flex'
+            className="flex items-center gap-2 text-white bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition-transform"
           >
             Contact
             <Image
               src={assets.arrow_icon}
               alt="Arrow"
-              width={10}
-              height={10}
-              className="inline ml-2"
+              width={12}
+              height={12}
+              className="inline"
             />
           </a>
         </div>
-      </nav>
+
+        {/* Hamburger Menu - Mobile */}
+        <button
+          className="md:hidden block p-2 rounded-md border border-gray-300 hover:bg-gray-100 transition"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <svg className="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-black bg-opacity-40">
-          <div className="absolute top-20 left-0 w-full px-4">
-            <ul className='flex flex-col gap-2 text-base font-medium bg-white rounded-lg shadow-md p-4'>
-              <li className='cursor-pointer hover:text-blue-600'>Home</li>
-              <li className='cursor-pointer hover:text-blue-600'>About</li>
-              <li className='cursor-pointer hover:text-blue-600'>Services</li>
-              <li className='cursor-pointer hover:text-blue-600'>Blog</li>
-
-              {/* Contact Button - Mobile */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden fixed inset-0 z-40 bg-black/30 backdrop-blur-sm flex flex-col items-center pt-24"
+          >
+            <motion.ul
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ staggerChildren: 0.1 }}
+              className="flex flex-col gap-6 bg-white rounded-2xl shadow-xl p-6 w-11/12 max-w-sm text-center"
+            >
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <a
+                    href={link.href}
+                    className="text-lg font-semibold text-gray-700 hover:text-blue-600 transition-colors"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+              {/* Mobile Contact Button */}
               <a
                 href="#contact"
-                className='text-blue-600 border border-blue-600 px-4 py-2 text-sm rounded-full font-semibold hover:bg-blue-50 hover:scale-105 transition-all duration-300 flex items-center justify-center w-full shadow-sm'
+                className="mt-4 inline-flex items-center justify-center gap-2 w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform"
               >
                 Contact
                 <Image
                   src={assets.arrow_icon}
                   alt="Arrow"
-                  width={14}
-                  height={14}
-                  className="inline ml-2 align-middle"
+                  width={12}
+                  height={12}
                 />
               </a>
-            </ul>
-          </div>
-        </div>
-      )}
-    </div>
+            </motion.ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
-}
+};
 
 export default Navbar;
