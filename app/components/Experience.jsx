@@ -6,7 +6,7 @@ export default function Experience() {
     {
       company: "Persistent Systems",
       role: "Software Engineer",
-      duration: "Dec 2023 - Present · 1 yr 9 mos",
+      duration: "Dec 2023 - Present · 1 yr 10 mos",
       location: "Bengaluru, Karnataka, India · Hybrid",
       details: [
         "Developed scalable applications using React.js and Next.js, enhancing user experience and performance.",
