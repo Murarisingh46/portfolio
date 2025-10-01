@@ -30,7 +30,7 @@ export default function AboutMe() {
           <p className="mt-6 text-lg sm:text-xl text-[#5D4037] leading-relaxed max-w-3xl">
             I’m a{" "}
             <span className="font-semibold text-[#BF360C]">
-              Frontend Engineer with 2 years of experience
+              Frontend Engineer with 2 years of experience this is comming from test.
             </span>{" "}
             passionate about building{" "}
             <span className="text-[#D84315] font-medium">
