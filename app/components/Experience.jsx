@@ -4,9 +4,24 @@ import { motion } from "framer-motion";
 export default function Experience() {
   const experiences = [
     {
+      company: "Dezy(Smiles.ai)",
+      role: "Software Developer",
+      duration: "Sep 2023 - Present · 7 months",
+      location: "Bengaluru, Karnataka, India · Hybrid",
+      details: [
+        "Led frontend development of the company website using React.js and Next.js, delivering a scalable and high-performance user experience.",
+        "Built reusable UI components and optimized pages using SSR/SSG, lazy loading, and code splitting to improve performance and SEO.",
+        "Developed and maintained an internal CRM dashboard used by doctors and the sales team to manage leads and workflows efficiently.",
+        "integrated RESTful APIs and implemented dynamic forms and data tables to support real-time business operations.",
+         "Collaborated with marketing, product, and backend teams to deliver responsive and user-focused features.",
+        
+      ],
+      skills: ["Next.js", "React.js", "Tailwind CSS", "JavaScript", "TypeScript","MongoDB","Node.js","Git","python"],
+    },
+    {
       company: "Persistent Systems",
       role: "Software Engineer",
-      duration: "Dec 2023 - Present · 1 yr 10 mos",
+      duration: "Dec 2023 - Sep 2025 · 1 yr 10 mos",
       location: "Bengaluru, Karnataka, India · Hybrid",
       details: [
         "Developed scalable applications using React.js and Next.js, enhancing user experience and performance.",
@@ -15,21 +30,11 @@ export default function Experience() {
       ],
       skills: ["Next.js", "React.js", "Tailwind CSS", "JavaScript", "TypeScript","MongoDB","Node.js","Git"],
     },
-    {
-      company: "Persistent Systems",
-      role: "Intern",
-      duration: "Jan 2023 - Dec 2023 · 1 yr",
-      location: "Bengaluru, Karnataka, India · Hybrid",
-      details: [
-        "Contributed to frontend development projects using HTML5, CSS, Java, JavaScript, React.js.",
-        "Gained hands-on experience in building interactive web pages and improving UI/UX.",
-      ],
-      skills: ["HTML5", "CSS", "Java", "JavaScript", "React.js"],
-    },
+    
     {
       company: "LTIMindtree",
       role: "Intern",
-      duration: "Feb 2023 - May 2023 · 4 mos",
+      duration: "jan 2023 - june 2023 · 5 mos",
       location: "Pune, Maharashtra, India · Hybrid",
       details: [
         "Completed internship project with Java and CSS.",
